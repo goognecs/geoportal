@@ -1,0 +1,22 @@
+<%- include('../layouts/header') %>
+
+  <div class="container my-4">
+      <%- include('post_result_pagination', {pagination}) %>
+        <% if (posts.length <= 0) { %>
+          <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center p-2">
+            <h2 class="title font-weight-bolder">No Post</h2>
+          </div>
+          <% } else { %>
+            <div class="w-100 p-2">
+              <% for(const post of posts) { %>
+                <%- include('post_card_result', {post}) %>
+                  <% } %>
+            </div>
+            <% } %>
+            <div class="mt-4">
+              <%- include('post_result_pagination', {pagination}) %>
+            </div>
+          </div>
+
+
+  <%- include('../layouts/footer') %>

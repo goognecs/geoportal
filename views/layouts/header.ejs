@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title><%= title || 'Geoportal' %></title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">  
+  <link rel="stylesheet" type="text/css" href="/styles.css">
+  <script src="/libs/jquery.js"></script>
+</head>
+<body>
+  <header class="blog-header py-3 container-fluid border border-4 d-flex justify-content-between" style="border: solid 2px red;">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a href="/geoportal" class="btn btn-primary d-flex align-items-center">
+          <i class="material-icons pw-2">travel_explore</i>
+          geoportal
+        </a>
+      </li>
+    </ul>
+    <p class="align-self-center">name: <%= user.fullname %></p>
+    <p>email: <%= user.email %></p>
+    <div class="w-50" style="height: 10px;">
+      <%- include("../posts/post_search", { search_query, constraint }) %>
+    </div>
+  </header>

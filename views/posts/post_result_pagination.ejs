@@ -1,0 +1,11 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <% for( let page=0; page < pagination.totalPages; page++ ) { %>
+      <li class="page-item <%= page === pagination.currentPage ? 'active' : '' %>">
+        <a class="page-link js-pagination-link" href="/post/search?constraint=<%= constraint %>&search_query=<%= search_query %>&page=<%= page %>">
+          <%= page + 1 %>
+        </a>
+      </li>
+      <% } %>
+  </ul>
+</nav>

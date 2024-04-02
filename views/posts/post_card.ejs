@@ -1,0 +1,54 @@
+<div class="card shadow-sm mt-3">
+  <div class="card-header">
+    <a href="/post/view/<%= post.id %>" class="link font-weight-bold">
+      <%= post.title %>
+    </a>
+    by <strong>
+      <%= post.user.firstName %>
+    </strong> : <%= new DateTime(post.createdAt).toRelativeCalendar() %>
+  </div>
+  <div class="card-body p-1" style="max-height: 110px; overflow: scroll;">
+    <div>
+      <% for(const tag of post.tags) { %>
+        <span class="badge bg-secondary"><%= tag %></span>
+      <% } %>
+    </div>
+    <p class="card-text">
+      <%= post.description %>
+    </p>
+    <% if (post.image) { %>
+      <img src="<%= post.image %>" alt="<%= post.title %>" class="img-fluid" style="width: 100%; max-height: 250px; object-fit: cover;">
+    <% } %>
+    <hr>
+    <form action="/post/comment" method="POST" id="post-comment-form-<%= post.id %>">
+      <input type="hidden" name="postId" value="<%= post.id %>">
+      <div class="form-group">
+        <i class="material-icons">create</i>
+        <label for="comment d-flex align-items-center">
+          Reply
+        </label>
+        <input type="text" class="form-control" id="comment-<%= post.id %>" name="comment" required style="height: 30px;">
+      </div>
+      <button type="submit" class="btn btn-primary mt-1">send</button>
+    </form>
+    <div class="card-footer mt-1" id="post-comments-<%= post.id %>">
+      <h5><i class="material-icons">forum</i>Comments</h5>
+      <% for(const comment of post.comments) { %>
+        <%- include('post_comment', {comment}) %>
+          <% } %>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $('#post-comment-form-<%= post.id %>').on('submit', function (e) {
+    e.preventDefault()
+    const data = new FormData(e.target)
+    $.post('/post/comment', { content: data.get('comment'), postId: data.get('postId') }).done(function (data) {
+      $('#comment-<%= post.id %>').val('')
+      $('#post-comments-<%= post.id %>').find('>:first-child').after(data)
+    })
+  })
+
+</script>

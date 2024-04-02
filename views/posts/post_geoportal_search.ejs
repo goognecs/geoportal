@@ -1,0 +1,13 @@
+<form action="/post/search" method="GET" class="d-flex align-items-center">
+  <div class="form-group me-2">
+    <div class="input-group">
+      <select class="form-select form-control" style="width: 30%;" id="constraint" name="constraint" value="<%= constraint || '' %>">
+        <option value="title" <%= constraint === 'title' ? 'selected' : ''%>>title</option>
+        <option value="tags" <%= constraint === 'tags' ? 'selected' : ''%>>tags</option>
+        <option value="description" <%= constraint === 'description' ? 'selected' : ''%>>description</option>
+      </select>
+      <input type="search" class="form-control" style="width: 50%;" id="search_query" name="search_query" value="<%= search_query || '' %>" placeholder="search post...">
+    </div>
+  </div>
+    <button type="submit" class="form-control btn btn-primary w-25">search</button>
+</form>
